@@ -101,16 +101,18 @@ const SKILLS = [
 */
 const PROJECTS = [
   {
-     id: 1,
-     title: "Worklify",
-     category: "Web",            // Web / Mobile / UI/UX
-     color: "var(--yellow)",
-     short: "Worklify adalah platform pencarian kerja dan manajemen karir modern yang menghubungkan para profesional dengan berbagai peluang kerja terbaik secara cepat, efisien, dan terintegrasi.",
-     long: "Worklify adalah platform manajemen kerja dan produktivitas serbaguna yang dirancang untuk membantu individu maupun tim mengelola proyek, menyederhanakan alur kerja (workflow), serta memantau progres tugas secara real-time.\nDengan antarmuka yang bersih, intuitif, dan responsif, Worklify memangkas kompleksitas koordinasi pekerjaan sehingga pengguna dapat berfokus pada hal yang paling penting: menyelesaikan pekerjaan dengan lebih efisien.",
-     tags: ["React", "JavaScript"],
-     demo: "https://worklify01.vercel.app/",
-     repo: "https://github.com/Kvnzz23/worklify",
-   }
+    id: 1,
+    title: "Worklify",
+    category: "Web",
+    color: "var(--yellow)",
+    image: "/proyek/worklify.png",
+    short:
+      "Worklify adalah platform pencarian kerja dan manajemen karir modern yang menghubungkan para profesional dengan berbagai peluang kerja terbaik secara cepat, efisien, dan terintegrasi.",
+    long: "Worklify adalah platform manajemen kerja dan produktivitas serbaguna yang dirancang untuk membantu individu maupun tim mengelola proyek, menyederhanakan alur kerja (workflow), serta memantau progres tugas secara real-time.\nDengan antarmuka yang bersih, intuitif, dan responsif, Worklify memangkas kompleksitas koordinasi pekerjaan sehingga pengguna dapat berfokus pada hal yang paling penting: menyelesaikan pekerjaan dengan lebih efisien.",
+    tags: ["React", "JavaScript"],
+    demo: "https://worklify01.vercel.app/",
+    repo: "https://github.com/Kvnzz23/worklify",
+  },
 ];
 
 const EXPERIENCE = {
@@ -339,6 +341,30 @@ const CSS = `
 .np .proj-body h3 { font-size: 1.35rem; }
 .np .proj-body p { color: var(--muted); font-size: .98rem; flex: 1; }
 .np .empty { padding: 28px; font-weight: 700; }
+
+.np .proj-img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  border-bottom: 3px solid var(--line);
+  background: var(--bg);
+}
+.np .proj-body p {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.np .modal-body p {
+  white-space: pre-line;
+}
+.np .modal .proj-img {
+  height: auto;
+  max-height: 52vh;
+  object-fit: contain;
+}
 
 /* modal */
 .np .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.65); display: grid; place-items: center; padding: 20px; z-index: 100; }
@@ -612,6 +638,27 @@ function Skills() {
   );
 }
 
+function ProjectThumb({ p }) {
+  const [broken, setBroken] = useState(false);
+
+  if (p.image && !broken) {
+    return (
+      <img
+        className="proj-img"
+        src={p.image}
+        alt={"Tampilan proyek " + p.title}
+        onError={() => setBroken(true)}
+      />
+    );
+  }
+
+  return (
+    <div className="proj-thumb" style={{ background: p.color }}>
+      {p.title}
+    </div>
+  );
+}
+
 function ProjectModal({ project, onClose }) {
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -635,9 +682,7 @@ function ProjectModal({ project, onClose }) {
         >
           ✕
         </button>
-        <div className="proj-thumb" style={{ background: project.color }}>
-          {project.title}
-        </div>
+        <ProjectThumb p={project} />
         <div className="modal-body">
           <h3>{project.title}</h3>
           <div>
@@ -649,10 +694,20 @@ function ProjectModal({ project, onClose }) {
           </div>
           <p>{project.long}</p>
           <div className="modal-actions">
-            <a className="btn" href={project.demo}>
+            <a
+              className="btn"
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+            >
               Buka demo
             </a>
-            <a className="btn white" href={project.repo}>
+            <a
+              className="btn white"
+              href={project.repo}
+              target="_blank"
+              rel="noreferrer"
+            >
               Lihat kode
             </a>
           </div>
@@ -717,9 +772,7 @@ function Projects() {
                   onClick={() => setSelected(p)}
                   aria-label={"Lihat detail " + p.title}
                 >
-                  <div className="proj-thumb" style={{ background: p.color }}>
-                    {p.title}
-                  </div>
+                  <ProjectThumb p={p} />
                   <div className="proj-body">
                     <h3>{p.title}</h3>
                     <p>{p.short}</p>
@@ -823,7 +876,7 @@ function CertModal({ cert, onClose }) {
             {cert.issuer}
             {cert.year ? " · " + cert.year : ""}
           </p>
-          {(cert.link) && (
+          {cert.link && (
             <div className="modal-actions">
               {cert.link && (
                 <a
@@ -1014,7 +1067,7 @@ function Footer() {
     <footer>
       <div className="wrap foot">
         <span>
-          © {new Date().getFullYear()} {PROFILE.name}. Dibuat dengan React.
+          © {new Date().getFullYear()} {PROFILE.name}.
         </span>
         <a className="btn sm" href="#beranda">
           Kembali ke atas
