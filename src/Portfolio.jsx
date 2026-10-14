@@ -939,6 +939,20 @@ function Certificates() {
   );
 }
 
+function Field({ id, label, error, children }) {
+  return (
+    <div className={"field" + (error ? " err" : "")}>
+      <label htmlFor={id}>{label}</label>
+      {children}
+      {error && (
+        <div className="err-msg" role="alert">
+          {error}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
@@ -952,10 +966,10 @@ function Contact() {
 
   const validate = () => {
     const er = {};
-    if (!form.name.trim()) er.name = "Kevin Herlambang";
-    if (!form.email.trim()) er.email = "kevinherlambang03@gmail.com";
+    if (!form.name.trim()) er.name = "Isi nama kamu.";
+    if (!form.email.trim()) er.email = "Isi alamat email kamu.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      er.email = "kevinherlambang03@gmail.com";
+      er.email = "Format email belum benar, contoh: nama@email.com.";
     if (form.message.trim().length < 10)
       er.message = "Tulis pesan minimal 10 karakter.";
     return er;
@@ -977,18 +991,6 @@ function Contact() {
     setSent(true);
     setForm({ name: "", email: "", message: "" });
   };
-
-  const Field = ({ id, label, children }) => (
-    <div className={"field" + (errors[id] ? " err" : "")}>
-      <label htmlFor={id}>{label}</label>
-      {children}
-      {errors[id] && (
-        <div className="err-msg" role="alert">
-          {errors[id]}
-        </div>
-      )}
-    </div>
-  );
 
   return (
     <section id="kontak">
@@ -1019,7 +1021,7 @@ function Contact() {
             </div>
           </div>
           <div className="box contact-form">
-            <Field id="name" label="Nama">
+            <Field id="name" label="Nama" error={errors.name}>
               <input
                 id="name"
                 type="text"
@@ -1028,7 +1030,7 @@ function Contact() {
                 autoComplete="name"
               />
             </Field>
-            <Field id="email" label="Email">
+            <Field id="email" label="Email" error={errors.email}>
               <input
                 id="email"
                 type="email"
@@ -1037,7 +1039,7 @@ function Contact() {
                 autoComplete="email"
               />
             </Field>
-            <Field id="message" label="Pesan">
+            <Field id="message" label="Pesan" error={errors.message}>
               <textarea
                 id="message"
                 value={form.message}
@@ -1061,7 +1063,6 @@ function Contact() {
     </section>
   );
 }
-
 function Footer() {
   return (
     <footer>
