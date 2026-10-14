@@ -66,7 +66,7 @@ const SKILLS = [
     type: "bars",
     items: [
       { name: "Dart", level: 75 },
-      { name: "Java", level: 70 },
+      { name: "JavaScript", level: 70 },
       { name: "PHP", level: 70 },
       { name: "C#", level: 60 },
       { name: "Python", level: 65 },
@@ -99,7 +99,19 @@ const SKILLS = [
      repo: "https://github.com/...",
    }
 */
-const PROJECTS = [];
+const PROJECTS = [
+  {
+     id: 1,
+     title: "Worklify",
+     category: "Web",            // Web / Mobile / UI/UX
+     color: "var(--yellow)",
+     short: "Worklify adalah platform pencarian kerja dan manajemen karir modern yang menghubungkan para profesional dengan berbagai peluang kerja terbaik secara cepat, efisien, dan terintegrasi.",
+     long: "Worklify adalah platform manajemen kerja dan produktivitas serbaguna yang dirancang untuk membantu individu maupun tim mengelola proyek, menyederhanakan alur kerja (workflow), serta memantau progres tugas secara real-time.\nDengan antarmuka yang bersih, intuitif, dan responsif, Worklify memangkas kompleksitas koordinasi pekerjaan sehingga pengguna dapat berfokus pada hal yang paling penting: menyelesaikan pekerjaan dengan lebih efisien.",
+     tags: ["React", "JavaScript"],
+     demo: "https://worklify01.vercel.app/",
+     repo: "https://github.com/Kvnzz23/worklify",
+   }
+];
 
 const EXPERIENCE = {
   Pendidikan: [
