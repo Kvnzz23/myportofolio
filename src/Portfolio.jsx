@@ -204,7 +204,7 @@ const CERTIFICATES = [
     title: "HCIA-Datacom V2.0 Course",
     issuer: "Huawei",
     year: "2026",
-    image: "/sertifikat/sertif_huawei",
+    image: "/sertifikat/sertif_huawei.png",
     link: "https://drive.google.com/file/d/10qFgM1XykwYMNQa5v3JDg8Qsm8UV021Z/view?usp=drive_link",
     color: "var(--orange)",
   },
