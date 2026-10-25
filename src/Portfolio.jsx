@@ -199,6 +199,15 @@ const CERTIFICATES = [
     link: "https://drive.google.com/file/d/1MXjr3iC99q8zcvprANfPrPEXCCI0dmHu/view?usp=sharing",
     color: "var(--orange)",
   },
+  {
+    id: 5,
+    title: "HCIA-Datacom V2.0 Course",
+    issuer: "Huawei",
+    year: "2026",
+    image: "/sertifikat/sertif_huawei",
+    link: "https://drive.google.com/file/d/10qFgM1XykwYMNQa5v3JDg8Qsm8UV021Z/view?usp=drive_link",
+    color: "var(--orange)",
+  },
 ];
 
 
